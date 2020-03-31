@@ -1,0 +1,27 @@
+// This #include statement was automatically added by the Particle IDE.
+#include <HC-SR04.h>
+
+
+
+// trigger / echo pins
+const int triggerPin = A0;
+const int echoPin = D2;
+
+int distance;
+
+void setup()
+{
+    pinMode(echoPin, OUTPUT);
+    pinMode(triggerPin, OUTPUT);
+}
+
+void loop()
+{
+    distance = analogRead(triggerPin);
+   Particle.publish("distance",String(distance), PRIVATE);
+    if (distance < 1000)
+    {
+         Particle.publish("distance","low", PRIVATE);
+    }
+    delay(1000);
+}
